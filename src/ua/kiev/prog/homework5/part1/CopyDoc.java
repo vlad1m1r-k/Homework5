@@ -18,7 +18,7 @@ public class CopyDoc {
 
     private static void copyFile(File file, File target) {
         try (FileInputStream inputStream = new FileInputStream(file); FileOutputStream outputStream = new FileOutputStream(target)){
-            
+
         } catch (IOException e) {
             System.out.println("Error copying file.");
         }
