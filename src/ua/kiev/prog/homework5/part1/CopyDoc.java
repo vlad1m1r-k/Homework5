@@ -1,6 +1,11 @@
 package ua.kiev.prog.homework5.part1;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 public class CopyDoc {
     public static void main(String[] args) {
@@ -17,10 +22,15 @@ public class CopyDoc {
     }
 
     private static void copyFile(File file, File target) {
-        try (FileInputStream inputStream = new FileInputStream(file); FileOutputStream outputStream = new FileOutputStream(target)){
-
+        Path inputFile = file.toPath();
+        Path outputFile = Paths.get(target.getName() + File.separator + file.getName());
+        try {
+            if (!Files.exists(target.toPath())) {
+                Files.createDirectory(target.toPath());
+            }
+            Files.copy(inputFile, outputFile, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
-            System.out.println("Error copying file.");
+            System.out.println("Error copying file!");
         }
     }
 }
